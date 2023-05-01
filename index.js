@@ -1,49 +1,161 @@
-const product = [
-  {
-    id: 0,
-    image: '.image/pixabay.jpg',
-    title: 'Z Flip Foldable Mobile',
-    price: 120,
-  },
+let openShopping = document.querySelector('.shopping');
+let closeShopping = document.querySelector('.closeshopping');
+let list = document.querySelector('.list');
+let listCard = document.querySelector('.listCard');
+let body = document.querySelector('body');
+let total = document.querySelector('.total');
+let quantity = document.querySelector('.quantity');
+
+openShopping.addEventListener('click', () => {
+  body.classList.add('active');
+})
+
+closeShopping.addEventListener('click', () =>{
+  body.classList.remove('active');
+})
+
+let products = [
   {
     id: 1,
-    image: '.image/pixabay.jpg',
-    title: 'Air Pods Pro',
-    price: 60,
+    name: 'PRODUCT NAME 1',
+    image: 'D.jpg',
+    price: 120000,
   },
+
   {
     id: 2,
-    image: '.image/pixabay.jpg',
-    title: '250D DSLR Camera',
-    price: 230,
+    name: 'PRODUCT NAME 2',
+    image: 'D.jpg',
+    price: 120000,
   },
+
   {
     id: 3,
-    image: '.image/pixabay.jpg',
-    title: 'Head Phones',
-    price: 100,
+    name: 'PRODUCT NAME 3',
+    image: 'D.jpg',
+    price: 120000,
+  },
+
+  {
+    id: 4,
+    name: 'PRODUCT NAME 4',
+    image: 'D.jpg',
+    price: 120000,
+  },
+
+  {
+    id: 5,
+    name: 'PRODUCT NAME 5',
+    image: 'D.jpg',
+    price: 120000,
+  },
+
+  {
+    id: 6,
+    name: 'PRODUCT NAME 6',
+    image: 'D.jpg',
+    price: 120000,
   }
 ];
+  
+let listCards = [];
+function initApp() {
+  products.forEach((value, key) => {
+    let newDiv = document.createElement('div');
+    newDiv.classList.add('item');
+    newDiv.innerHTML = `
+    <img src="images/${value.image}"/>
+    <div class="title">${value.name}</div>
+    <div class="price">${value.price.toLocaleString()}</div>
+    <button onclick#"addToCard(${key})">Add To Card</button>
+    `;
+    list.appendChild(newDiv);
 
-const categories = [...new set(product.map((item)=>{return item}))];
+  });
+}
+initApp(); 
+function addToCard(key) {
+  if (listCards[key] == null) {
+    listCards[key] = products[key];
+    listCards[key].quantity = 1;
+  }
+  reloadCard();
+}
+function reloadCard(){
+  listCard.innerHTML = '';
+  let count = 0;
+  let totalPrice = 0;
+  listCards.forEach((value, key) => {
+    totalPrice = totalPrice + value.price;
+    count = count + value.quantity;
 
-let i=0;
+    if (value != null) {
+      let newDiv = document.createElement('li');
+      newDiv.innerHTML = 
+      `<div><img src="images/${value.image}"/></div>
+      <div>${value.name}</div>
+      <div>${value.price.toLocaleString()}</div>
+      <div>${value.quantity}</div>
+      <div>
+        <button onclick="changeQuantity(${key}, ${value.quantity - 1})">-</button>
+        <div class="count">${value.quantity}</div>
+        <div> 
+        <button onclick="changeQuantity(${key}, ${value.quantity + 1})">+</button>
+        <div class="count">${value.quantity}</div>
+        <div> 
+      </div>`;
+      listCard.appendChild(newDiv);
+    }
+  })
+  total.innerText = totalPrice.toLocaleString();
+  quantity.innerText = count;
+}
 
-document.getElementById("root").innerHTML = categories.map((item)=>{
-  var {image, title, price} = item;
-  return (
-    `<div class = 'box'>
-      <div class='img-box'>
-        <img class='images' src= ${image}></img>
-      </div>
-      <div class = 'bottom'>
-        <p>${title}</p>
-        <h2>$ ${price}.00</h2>` +
-        "<button onclick='addtocart("+(i++)+")'>Add to cart</button>"+
-      `</div>
-    </div>`
-  )
-}).join('');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
