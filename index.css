@@ -131,9 +131,17 @@ padding: 3px 10px;
 
 }
 
+.listCard li{
+  display: grid;
+  grid-template-columns: 100px repeat(3, 1fr);
+  color: #fff;
+  row-gap: 10px;
+  margin-bottom:20px ;
+}
 
-
-
+.listCard li div{
+  
+}
 
 
 

@@ -89,7 +89,7 @@ function reloadCard(){
     totalPrice = totalPrice + value.price;
     count = count + value.quantity;
 
-    if (value != null) {
+    if (value != null){
       let newDiv = document.createElement('li');
       newDiv.innerHTML = 
       `<div><img src="images/${value.image}"/></div>
